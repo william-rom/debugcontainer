@@ -82,7 +82,10 @@ RUN set -eux; \
     oc version; \
     mc --version
 
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod 0755 /usr/local/bin/entrypoint.sh
+
 USER 10001
 WORKDIR /home/debug
 
-CMD ["sleep", "infinity"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
