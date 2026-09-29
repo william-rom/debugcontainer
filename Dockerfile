@@ -30,6 +30,8 @@ SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
 # Base image is digest-pinned and apk packages come from Alpine's signed
 # repositories, so package-level pinning is intentionally not used here.
+# gcompat provides the glibc loader shim: the upstream oc binary is
+# glibc-linked and cannot exec on musl without it.
 # hadolint ignore=DL3018
 RUN apk add --no-cache \
         bash \
@@ -38,6 +40,7 @@ RUN apk add --no-cache \
         ca-certificates \
         coreutils \
         curl \
+        gcompat \
         gzip \
         jq \
         netcat-openbsd \
